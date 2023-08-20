@@ -1,0 +1,14 @@
+
+.form-wrapper {
+  width: 100%;
+  display: flex; 
+  align-items: center; 
+}
+
+button {
+  width: 10%; 
+}
+
+form { 
+  width: 90%; 
+}

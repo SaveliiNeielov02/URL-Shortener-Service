@@ -1,0 +1,11 @@
+<div *ngIf="!isEditing">
+  <pre>
+  <code>{{ code }}</code>
+  </pre>
+  <button (click)="startEditing()" *ngIf="authService.isAdmin()">Change</button>
+</div>
+<div *ngIf="isEditing">
+  <textarea [(ngModel)]="editedCode" style="width: 800px; height: 800px;"></textarea>
+  <br>
+  <button (click)="saveChanges()">Save changes</button>
+</div>

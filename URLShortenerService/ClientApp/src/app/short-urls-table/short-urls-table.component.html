@@ -1,0 +1,37 @@
+<h1 id="tableLabel">ShorterURL Table</h1>
+
+<p>This component contains short urls-list.</p>
+
+<p *ngIf="!records"><em>Loading...</em></p>
+
+<div class="form-wrapper">
+  <form *ngIf="authService.isAdmin() || authService.isOrdinary()" (ngSubmit)="onSubmit()">
+    <label for="AdditionURL">New URL to short:</label>
+    <input style="width:90%;" type="text" id="AdditionURL" name="AdditionURL" [(ngModel)]="AdditionURL" required>
+    <button type="submit" style="width:10%;">Shorten</button>
+  </form>
+</div>
+<button *ngIf="authService.isAdmin()" type="submit" style="width:10%;"
+        (click)="onDeleteAllRecordsButtonClick()">Delete all records</button>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="records">
+  <thead>
+    <tr>
+      <th>LongURL</th>
+      <th>ShortURL</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let record of records">
+      <td>{{ record.LongURL }}</td>
+      <td>{{ record.ShortURL }}</td>
+      <td>
+        <button (click)="onDeleteButtonClick(record.ShortURL)" style="width:90%;"
+  *ngIf="(authService.isAdmin() || authService.isOrdinary()) && authService.getLogin()==record.UserLogin">Delete the record</button>
+      </td>
+      <td>
+        <a [routerLink]="['/view', record.ShortURL]" *ngIf="(authService.isAdmin() || authService.isOrdinary())">View</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
